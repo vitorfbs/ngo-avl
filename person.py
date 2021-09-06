@@ -17,7 +17,10 @@ class Person():
         self.categories = []
 
     def add_category(self, category):
-        if category["type"] == "atendee":
+        if category["type"] in self.category_list():
+            print("Person already os the chosen category")
+
+        elif category["type"] == "atendee":
             if any(isinstance(c, Donor) for c in self.categories):
                 print("Atendee cannot be Donor")
             elif any(isinstance(c, Employee) for c in self.categories):
@@ -95,17 +98,20 @@ class Person():
         for category in self.categories:
             categories.append(category.__dict__)
         return categories
+        
+    def category_list(self):
+        categories_list = []
+        for category in self.categories:
+            categories_list.append(category.type)
+        return categories_list
 
     def search(self, term):
         for k, v in self.as_dictionary().items():
             if term in v:
-                print(v)
                 return True
     
         for category in self.categories_as_dictionary():
             for k, v in category.items(): 
                 if term in v:
-                    print(v)
                     return True
         return False
-        
