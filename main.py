@@ -1,3 +1,4 @@
+from re import search
 from person import Person
 from factory import Factory
 from random import randrange
@@ -21,7 +22,6 @@ for i in range(randrange(1, 20)):
 
     people.append(person)
 
-print(people)
 
 unsorted_people = []
 for person in people:
@@ -32,12 +32,18 @@ with open('output/unsorted.json', 'w') as f:
 
 people.sort(key=lambda person: (person.name, person.categories))
 
-print(people)
 
 sorted_people = []
 
 for person in people:
     sorted_people.append(person.as_dictionary())
 
-with open('output/sorted.json', 'w') as f:
+with open('output/people.json', 'w') as f:
     json.dump(sorted_people, f)
+
+matches = []
+for p in people:
+    if p.search("a") == True:
+        matches.append(p)
+
+print(matches)

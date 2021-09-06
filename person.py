@@ -7,6 +7,7 @@ from visitor import Visitor
 from atendee import Atendee
 from donor import Donor
 from employee import Employee
+import re
 class Person():
     def __init__(self, name, birth, number = "", email = ""):
         self.name = name
@@ -39,8 +40,6 @@ class Person():
                     category["donation_history"],
                 )
                 self.categories.append(donor)
-
-
             
         elif category["type"] == "employee":
             if any(isinstance(c, Atendee) for c in self.categories):
@@ -69,6 +68,7 @@ class Person():
                     category["admission"]
                 )
             self.categories.append(volunteer)
+
         else:
             print("Error while checking category type")
 
@@ -82,8 +82,30 @@ class Person():
 
         }
 
+    def as_dictionary_with_no_categories(self):
+        return {
+            "name": self.name,
+            "birth": self.birth,
+            "number": self.number,
+            "email": self.email,
+        }
+
     def categories_as_dictionary(self):
         categories = []
         for category in self.categories:
             categories.append(category.__dict__)
         return categories
+
+    def search(self, term):
+        for k, v in self.as_dictionary().items():
+            if term in v:
+                print(v)
+                return True
+    
+        for category in self.categories_as_dictionary():
+            for k, v in category.items(): 
+                if term in v:
+                    print(v)
+                    return True
+        return False
+        
