@@ -25,13 +25,7 @@ print(people)
 
 unsorted_people = []
 for person in people:
-    p = {
-        "name": person.name,
-        "birth": person.birth,
-        "number": person.number,
-        "email": person.email
-    }
-    unsorted_people.append(p)
+    unsorted_people.append(person.as_dictionary())
 
 with open('output/unsorted.json', 'w') as f:
     json.dump(unsorted_people, f)
