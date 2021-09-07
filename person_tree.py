@@ -1,5 +1,8 @@
 from person_node import PersonNode
+from memory_profiler import profile
+
 class PersonTree():
+    @profile
     def has_priority(self, a, b):
         if a.calculate_weight() > b.calculate_weight():
             return True
@@ -13,6 +16,7 @@ class PersonTree():
         else:
             return False
  
+    @profile
     def insert(self, root, person):
      
         if root == None:
@@ -40,6 +44,7 @@ class PersonTree():
  
         return root
  
+    @profile
     def rotate_left(self, target):
         next = target.right
         subtree = next.left
@@ -51,6 +56,7 @@ class PersonTree():
  
         return next
  
+    @profile
     def rotate_right(self, target):
         next = target.left
         subtree = next.right
@@ -62,33 +68,28 @@ class PersonTree():
  
         return next
  
+    @profile
     def calculate_height(self, root):
         if root == None:
             return 0
  
         return root.height
  
+    @profile
     def calculate_balance(self, root):
         if root == None:
             return 0
  
         return self.calculate_height(root.left) - self.calculate_height(root.right)
 
+    @profile
     def minimum_node(self, root):
         if root == None or root.left == None:
             return root
  
         return self.minimum_node(root.left)
- 
-    def preOrder(self, root):
- 
-        if root == None:
-            return
- 
-        print("{0} ".format(root.person.name), end="")
-        self.preOrder(root.left)
-        self.preOrder(root.right)
 
+    @profile
     def remove(self, root, person):
  
         if root == None:

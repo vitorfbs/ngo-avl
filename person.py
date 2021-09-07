@@ -7,7 +7,7 @@ from visitor import Visitor
 from atendee import Atendee
 from donor import Donor
 from employee import Employee
-import re
+from memory_profiler import profile
 class Person():
     def __init__(self, name, birth, number = "", email = ""):
         self.name = name
@@ -16,6 +16,7 @@ class Person():
         self.email = email
         self.categories = []
 
+    @profile
     def add_category(self, category):
         if category["type"] in self.category_list():
             print("Person already os the chosen category")
@@ -75,6 +76,7 @@ class Person():
         else:
             print("Error while checking category type")
 
+    @profile
     def as_dictionary(self):
         return {
             "name": self.name,
@@ -85,6 +87,7 @@ class Person():
 
         }
 
+    @profile
     def as_dictionary_with_no_categories(self):
         return {
             "name": self.name,
@@ -93,18 +96,21 @@ class Person():
             "email": self.email,
         }
 
+    @profile
     def categories_as_dictionary(self):
         categories = []
         for category in self.categories:
             categories.append(category.__dict__)
         return categories
-        
+    
+    @profile
     def category_list(self):
         categories_list = []
         for category in self.categories:
             categories_list.append(category.type)
         return categories_list
 
+    @profile
     def search(self, term):
         for k, v in self.as_dictionary().items():
             if term in v:
@@ -116,6 +122,7 @@ class Person():
                     return True
         return False
 
+    @profile
     def calculate_weight(self):
         weight = 0
         for category in self.categories_as_dictionary():

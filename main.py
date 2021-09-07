@@ -57,11 +57,8 @@ with open('output/people.json', 'w') as f:
 # dentro de um Array ou lista usando recursão/ laço;
 matches = []
 for p in people:
-    print(p.category_list())
     if p.search("a") == True:
         matches.append(p)
-
-print(matches)
 
 # 3. Armazenar os dados em uma AVL, ordenado pelo nome e categoria, a fim de permitir a 
 # consulta de uma determinada pessoa. 
@@ -80,14 +77,4 @@ root = None
 for p in people:
     root = person_tree.insert(root, p)
 
-print("Preorder traversal of the",
-      "constructed AVL tree is")
-person_tree.preOrder(root)
-print()
-
 root = person_tree.remove(root, people[0])
-
-print("Preorder traversal of the",
-      "constructed AVL tree is")
-person_tree.preOrder(root)
-print()
