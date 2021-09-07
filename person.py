@@ -115,3 +115,19 @@ class Person():
                 if term in v:
                     return True
         return False
+
+    def calculate_weight(self):
+        weight = 0
+        for category in self.categories_as_dictionary():
+            if category["type"] == "atendee":
+                weight += 100        
+            elif category["type"] == "donor":
+                weight += 4
+            elif category["type"] == "visitor":
+                weight += 3
+            elif category["type"] == "volunteer":
+                weight += 2
+            elif category["type"] == "employee":
+                weight += 1
+
+        return weight

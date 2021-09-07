@@ -1,3 +1,4 @@
+from person_tree import PersonTree
 from re import search
 from person import Person
 from factory import Factory
@@ -73,3 +74,20 @@ print(matches)
 # Portanto, o critério de ordenação deve ser: colocar nas primeiras posições do Array 
 # os registros dos atendidos e, em ordem crescente, 
 # uma das informações que foi colocada como relevante no item 1.
+person_tree = PersonTree()
+
+root = None
+for p in people:
+    root = person_tree.insert(root, p)
+
+print("Preorder traversal of the",
+      "constructed AVL tree is")
+person_tree.preOrder(root)
+print()
+
+root = person_tree.remove(root, people[0])
+
+print("Preorder traversal of the",
+      "constructed AVL tree is")
+person_tree.preOrder(root)
+print()
